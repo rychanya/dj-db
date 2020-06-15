@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from phones.models import Phone
 from django.http import Http404
 from urllib.parse import urlencode
@@ -29,8 +29,9 @@ def show_catalog(request):
 
 def show_product(request, slug):
     template = 'product.html'
-    phone = Phone.objects.filter(slug__exact=slug).first()
-    if not phone:
-        raise Http404
+    phone = get_object_or_404(Phone, slug=slug)
     context = {'phone': phone}
     return render(request, template, context)
+
+def home(request):
+    return redirect('catalog')
