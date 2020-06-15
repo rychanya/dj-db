@@ -9,11 +9,15 @@
         </div>
 
         <div class="sort-block">
-            {# Здесь должен быть раздел с сортировкой #}
+            {% for sort_name, sort_url in  sort %}
+                <a class="btn btn-primary" href="{{ sort_url }}" role="button">{{ sort_name }}</a>
+            {% endfor %}
         </div>
 
         <div class="content">
-            {# Здесь должен отображаться каталог с телефонами #}
+            {% for phone in phones %}
+            {% include "phone.html" %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
